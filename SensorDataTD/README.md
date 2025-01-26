@@ -199,4 +199,4 @@ Contributions are welcome! Please submit issues or pull requests to improve this
 
 ## Contact
 
-For questions or support, please contact [steve@saphirelabs.com](steve@saphirelabs.com).
+For questions or support, please contact [steve@saphirelabs.com](mailto:steve@saphirelabs.com).

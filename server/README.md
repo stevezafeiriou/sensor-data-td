@@ -167,4 +167,4 @@ Contributions are welcome! Feel free to submit issues, feature requests, or pull
 
 ## Contact
 
-For questions or support, please contact [steve@saphirelabs.com](steve@saphirelabs.com).
+For questions or support, please contact [steve@saphirelabs.com](mailto:steve@saphirelabs.com).

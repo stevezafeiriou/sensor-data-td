@@ -2,6 +2,8 @@
 
 The **SensorDataTD** project is a complete solution for real-time accelerometer data collection, processing, and transmission. It includes both hardware and software components, along with a 3D-printable case design.
 
+You can find the complete tutorial at this link: [Sensor Data to TouchDesigner](#) _(Link to be added)_.
+
 ---
 
 ## Project Overview
@@ -10,7 +12,7 @@ This project comprises three main components:
 
 1. **ESP32 Firmware**: Collects sensor data from an MPU6050 accelerometer, processes it, and transmits it via WebSocket.
 2. **Server**: A Node.js WebSocket server to handle incoming sensor data and broadcast it to connected clients.
-3. **3D-Printed Case**: A custom enclosure for the ESP32 and MPU6050 hardware.
+3. **3D-Printed Case**: A custom enclosure for the LilyGo T-Display S3 and MPU6050 hardware.
 
 ---
 
@@ -22,6 +24,7 @@ This project comprises three main components:
   - **`models/`**: Contains `.stl` files and 3D-printing instructions for the project case.
   - **`server/`**: Contains the WebSocket server code in Node.js.
     - [Read the Server Documentation](./server/README.md)
+  - **`lilygo-t-display/`**: Contains Squareline Studio files for GUI design (ignored in Git).
 
 ---
 
@@ -31,25 +34,26 @@ This project comprises three main components:
 
 #### Components Required:
 
-- **ESP32 Development Board**
+- **LilyGo T-Display S3**
+  - **Integrated TFT Display**: No additional configuration is needed.
 - **MPU6050 Accelerometer Module**
-- **TFT Display (SPI-Compatible)**
-- **Vibration Motor (Optional)**
+- **Vibration Motor**
 - Jumper wires and breadboard or custom PCB
 - Power supply (e.g., USB cable or LiPo battery)
 
 #### Wiring Diagram:
 
-| ESP32 Pin | MPU6050 Pin | TFT Pin                  | Vibration Motor Pin     |
-| --------- | ----------- | ------------------------ | ----------------------- |
-| `3V3`     | `VCC`       | `VCC`                    | Positive terminal       |
-| `GND`     | `GND`       | `GND`                    | Negative terminal       |
-| `GPIO17`  | `SCL`       | `SCK`                    |                         |
-| `GPIO18`  | `SDA`       | `MOSI`                   |                         |
-| `GPIO15`  |             | `BL` (Backlight Control) |                         |
-| `GPIO10`  |             |                          | Motor Positive Terminal |
+![Diagram](./images/diagram.jpg)
 
-**Note**: Use appropriate resistors or level shifters for the TFT display if needed.
+| LilyGo T-Display Pin | MPU6050 Pin | Vibration Motor Pin     |
+| -------------------- | ----------- | ----------------------- |
+| `3V3`                | `VCC`       | Positive terminal       |
+| `GND`                | `GND`       | Negative terminal       |
+| `GPIO18`             | `SCL`       |                         |
+| `GPIO17`             | `SDA`       |                         |
+| `GPIO10`             |             | Motor Positive Terminal |
+
+**Note**: The TFT display is integrated into the LilyGo T-Display S3 board and requires no additional wiring or configuration.
 
 ---
 
@@ -57,29 +61,22 @@ This project comprises three main components:
 
 1. **Set Up the Arduino IDE**:
 
-   - Install the **ESP32 Board Support Package**:
-
-     - Go to `File -> Preferences` and add the URL:  
-       `https://dl.espressif.com/dl/package_esp32_index.json`
-     - Go to `Tools -> Board -> Boards Manager`, search for `ESP32`, and install it.
+   - Follow this guide to set up the LilyGo T-Display S3 in the Arduino IDE:  
+     [LilyGo T-Display S3 - Setup Guide](https://stevezafeiriou.com/lilygo-t-display-s3-setup/)
 
    - Install the Required Libraries:
-     - `TFT_eSPI`
+     - `TFT_eSPI` (pre-configured for the T-Display)
      - `WebSocketsClient`
      - `Preferences`
      - `Adafruit_MPU6050`
 
-2. **Configure the TFT Display**:
-
-   - Modify `User_Setup.h` in the `TFT_eSPI` library to match your display's pin connections.
-
-3. **Upload the Firmware**:
+2. **Upload the Firmware**:
 
    - Open the `SensorDataTD/SensorDataTD.ino` file in Arduino IDE.
-   - Select the correct board and port (`Tools -> Board -> ESP32 Dev Module`).
-   - Upload the firmware to your ESP32.
+   - Select the **LilyGo T-Display S3** board under `Tools -> Board`.
+   - Upload the firmware to the board.
 
-4. **WiFi Configuration**:
+3. **WiFi Configuration**:
    - On first boot, connect to the `SensorDataTD` WiFi network.
    - Navigate to `192.168.4.1` in your browser to configure WiFi and server IP.
 
@@ -123,7 +120,7 @@ This project comprises three main components:
      - Infill: 20%-30%
 
 2. **Assemble the Hardware**:
-   - Place the ESP32, MPU6050, TFT display, and vibration motor into the case.
+   - Place the LilyGo T-Display S3, MPU6050, and vibration motor into the case.
    - Use screws or adhesive as needed to secure the components.
 
 ---
@@ -132,11 +129,11 @@ This project comprises three main components:
 
 1. **Start the ESP32**:
 
-   - Power on the ESP32. It will connect to WiFi and start transmitting sensor data to the WebSocket server.
+   - Power on the LilyGo T-Display S3. It will connect to WiFi and start transmitting sensor data to the WebSocket server.
 
 2. **Start the Server**:
 
-   - Ensure the server is running and the ESP32 is configured with the correct WebSocket server IP.
+   - Ensure the server is running and the LilyGo T-Display S3 is configured with the correct WebSocket server IP.
 
 3. **Monitor the Data**:
    - Connect a WebSocket client to the server (e.g., `ws://<server_ip>:8080`) to view the real-time sensor data.
@@ -152,12 +149,17 @@ This project comprises three main components:
 
 2. **Server Not Receiving Data**:
 
-   - Verify the ESP32 is configured with the correct server IP.
+   - Verify the LilyGo T-Display S3 is configured with the correct server IP.
    - Check that the Node.js server is running and listening on port 8080.
 
-3. **TFT Display Issues**:
-   - Ensure the pins in `User_Setup.h` match your hardware.
-   - Verify the display wiring.
+3. **Accelerometer Data Issues**:
+
+   - Ensure the MPU6050 is connected to the correct pins (`SCL -> GPIO18`, `SDA -> GPIO17`).
+   - Verify that the MPU6050 module is powered.
+
+4. **Vibration Motor Not Working**:
+   - Check the wiring for the motor (`Input -> GPIO10`).
+   - Verify that the vibration threshold is configured appropriately in the firmware.
 
 ---
 
@@ -175,4 +177,4 @@ Contributions are welcome! Feel free to submit issues, feature requests, or pull
 
 ## Contact
 
-For questions or support, please contact [steve@saphirelabs.com](steve@saphirelabs.com).
+For questions or support, please contact [steve@saphirelabs.com](mailto:steve@saphirelabs.com).
