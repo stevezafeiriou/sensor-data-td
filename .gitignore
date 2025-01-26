@@ -1,0 +1,6 @@
+# Ignore Node.js dependencies in the server folder
+server/node_modules/
+server/package-lock.json
+
+# Ignore Squareline Studio files in lilygo-t-display folder
+lilygo-t-display/
