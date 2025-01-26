@@ -4,8 +4,6 @@ The **SensorDataTD** project is a complete solution for real-time accelerometer 
 
 You can find the complete tutorial at this link: [Sensor Data to TouchDesigner](#) _(Link to be added)_.
 
----
-
 ## Project Overview
 
 This project comprises three main components:
@@ -13,8 +11,6 @@ This project comprises three main components:
 1. **ESP32 Firmware**: Collects sensor data from an MPU6050 accelerometer, processes it, and transmits it via WebSocket.
 2. **Server**: A Node.js WebSocket server to handle incoming sensor data and broadcast it to connected clients.
 3. **3D-Printed Case**: A custom enclosure for the LilyGo T-Display S3 and MPU6050 hardware.
-
----
 
 ## Folder Structure
 
@@ -25,8 +21,6 @@ This project comprises three main components:
   - **`server/`**: Contains the WebSocket server code in Node.js.
     - [Read the Server Documentation](./server/README.md)
   - **`lilygo-t-display/`**: Contains Squareline Studio files for GUI design (ignored in Git).
-
----
 
 ## Project Setup
 
@@ -55,8 +49,6 @@ This project comprises three main components:
 
 **Note**: The TFT display is integrated into the LilyGo T-Display S3 board and requires no additional wiring or configuration.
 
----
-
 ### 2. ESP32 Firmware
 
 1. **Set Up the Arduino IDE**:
@@ -82,8 +74,6 @@ This project comprises three main components:
 
 [Read the ESP32 Firmware Documentation](./SensorDataTD/README.md)
 
----
-
 ### 3. Server Setup
 
 1. **Install Node.js**:
@@ -107,8 +97,6 @@ This project comprises three main components:
 
 [Read the Server Documentation](./server/README.md)
 
----
-
 ### 4. 3D-Printed Case
 
 1. **Print the Case**:
@@ -123,8 +111,6 @@ This project comprises three main components:
    - Place the LilyGo T-Display S3, MPU6050, and vibration motor into the case.
    - Use screws or adhesive as needed to secure the components.
 
----
-
 ## Usage
 
 1. **Start the ESP32**:
@@ -137,8 +123,6 @@ This project comprises three main components:
 
 3. **Monitor the Data**:
    - Connect a WebSocket client to the server (e.g., `ws://<server_ip>:8080`) to view the real-time sensor data.
-
----
 
 ## Troubleshooting
 
@@ -161,19 +145,13 @@ This project comprises three main components:
    - Check the wiring for the motor (`Input -> GPIO10`).
    - Verify that the vibration threshold is configured appropriately in the firmware.
 
----
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
-
 ## Contributions
 
 Contributions are welcome! Feel free to submit issues, feature requests, or pull requests.
-
----
 
 ## Contact
 

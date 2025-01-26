@@ -9,8 +9,6 @@ This project implements a WebSocket server for handling real-time sensor data. I
 - **Local IP Detection**: Displays the local IP addresses for easy connection.
 - **Error Handling**: Handles invalid JSON messages gracefully.
 
----
-
 ## Prerequisites
 
 Ensure the following software is installed on your system:
@@ -20,8 +18,6 @@ Ensure the following software is installed on your system:
 
 2. **WebSocket Client** (optional for testing)  
    You can use tools like [websocat](https://github.com/vi/websocat), browser-based WebSocket clients, or custom scripts to connect to the server.
-
----
 
 ## Installation
 
@@ -36,8 +32,6 @@ Ensure the following software is installed on your system:
    ```bash
    npm install
    ```
-
----
 
 ## Usage
 
@@ -82,8 +76,6 @@ Clients can send JSON-formatted sensor data to the server. Example message forma
 
 The server will broadcast this data to all connected clients.
 
----
-
 ## Code Overview
 
 ### Key Functions
@@ -109,8 +101,6 @@ The server will broadcast this data to all connected clients.
 4. **Error Logging**  
    Logs the raw message and error details if a message fails to parse.
 
----
-
 ## Development
 
 ### Dependencies
@@ -131,8 +121,6 @@ To extend the server, you can:
 - Implement authentication for secure client connections.
 - Log data to a database or file system.
 
----
-
 ## Troubleshooting
 
 1. **Port Already in Use**  
@@ -151,19 +139,13 @@ To extend the server, you can:
    Raw message that failed: <message>
    ```
 
----
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
-
 ## Contributions
 
 Contributions are welcome! Feel free to submit issues, feature requests, or pull requests.
-
----
 
 ## Contact
 
