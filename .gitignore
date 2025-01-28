@@ -7,3 +7,5 @@ lilygo-t-display/
 
 # Ignore macOS files
 .DS_Store
+
+.vscode/
