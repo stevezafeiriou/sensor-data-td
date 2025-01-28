@@ -48,6 +48,7 @@ void updateDisplay(float x, float y, float z, const String& status) {
 void setup() {
     Serial.begin(115200);
     pinMode(DISPLAY_POWER_PIN, OUTPUT);
+    //Display Control (Battery Powered)
     digitalWrite(DISPLAY_POWER_PIN, HIGH);
 
     // Initialize modules
