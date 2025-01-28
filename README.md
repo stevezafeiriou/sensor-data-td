@@ -26,6 +26,8 @@ This project comprises three main components:
 
 ### 1. Hardware Setup
 
+![Components](https://stevezafeiriou.com/wp-content/uploads/2025/01/components.jpg)
+
 #### Components Required:
 
 - **LilyGo T-Display S3**
@@ -37,7 +39,7 @@ This project comprises three main components:
 
 #### Wiring Diagram:
 
-![Diagram](./images/diagram.jpg)
+![Diagram](https://stevezafeiriou.com/wp-content/uploads/2025/01/diagram.jpg)
 
 | LilyGo T-Display Pin | MPU6050 Pin | Vibration Motor Pin     |
 | -------------------- | ----------- | ----------------------- |
