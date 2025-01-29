@@ -2,6 +2,11 @@
 server/node_modules/
 server/package-lock.json
 
+# Ignore Node.js dependencies in the server folder
+react-app/node_modules/
+react-app/package-lock.json
+react-app/build
+
 # Ignore Squareline Studio files in lilygo-t-display folder
 lilygo-t-display/
 !lilygo-t-display/export/

@@ -1,14 +1,14 @@
 {
-  "name": "sensor-data-to-td",
-  "version": "1.0.0",
-  "description": "A node.js relay server that receives sensor data from an esp32 and transmits them to connected clients.",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Stefanos D. Zafeiriou",
-  "license": "ISC",
-  "dependencies": {
-    "ws": "^8.18.0"
-  }
+	"name": "sensor-data-to-td",
+	"version": "1.0.0",
+	"description": "A node.js relay server that receives sensor data from an esp32 and transmits them to connected clients.",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Stefanos D. Zafeiriou",
+	"license": "ISC",
+	"dependencies": {
+		"ws": "^8.18.0"
+	}
 }
