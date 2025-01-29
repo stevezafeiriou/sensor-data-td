@@ -4,6 +4,8 @@ server/package-lock.json
 
 # Ignore Squareline Studio files in lilygo-t-display folder
 lilygo-t-display/
+!lilygo-t-display/export/
+!lilygo-t-display/export/SensorDataTD/
 
 # Ignore macOS files
 .DS_Store
