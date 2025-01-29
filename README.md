@@ -6,11 +6,12 @@ You can find the complete tutorial at this link: [Sensor Data to TouchDesigner](
 
 ## Project Overview
 
-This project comprises three main components:
+This project comprises four main components:
 
 1. **ESP32 Firmware**: Collects sensor data from an MPU6050 accelerometer, processes it, and transmits it via WebSocket.
 2. **Server**: A Node.js WebSocket server to handle incoming sensor data and broadcast it to connected clients.
-3. **3D-Printed Case**: A custom enclosure for the LilyGo T-Display S3 and MPU6050 hardware.
+3. **React App**: A real-time 3D visualization of sensor data using React and Three.js.
+4. **3D-Printed Case**: A custom enclosure for the LilyGo T-Display S3 and MPU6050 hardware.
 
 ## Folder Structure
 
@@ -20,6 +21,8 @@ This project comprises three main components:
   - **`models/`**: Contains `.stl` files and 3D-printing instructions for the project case.
   - **`server/`**: Contains the WebSocket server code in Node.js.
     - [Read the Server Documentation](./server/README.md)
+  - **`react-app/`**: A React application for real-time visualization of sensor data.
+    - [Read the React App Documentation](./react-app/README.md)
   - **`lilygo-t-display/`**: Contains Squareline Studio files for GUI design (ignored in Git).
 
 ## Project Setup
@@ -30,8 +33,7 @@ This project comprises three main components:
 
 #### Components Required:
 
-- **LilyGo T-Display S3**
-  - **Integrated TFT Display**: No additional configuration is needed.
+- **LilyGo T-Display S3** or any other esp32 development board.
 - **MPU6050 Accelerometer Module**
 - **Vibration Motor**
 - Jumper wires and breadboard or custom PCB
@@ -99,7 +101,33 @@ This project comprises three main components:
 
 [Read the Server Documentation](./server/README.md)
 
-### 4. 3D-Printed Case
+### 4. React App Setup
+
+The React app provides a 3D visualization of the sensor data.
+
+1. **Navigate to the React App Directory**:
+
+   ```bash
+   cd react-app
+   ```
+
+2. **Install Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the Development Server**:
+
+   ```bash
+   npm start
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to view the app in your browser. The app will display real-time sensor data and update the rotation of a 3D model.
+
+[Read the React App Documentation](./react-app/README.md)
+
+### 5. 3D-Printed Case
 
 1. **Print the Case**:
 
@@ -124,7 +152,8 @@ This project comprises three main components:
    - Ensure the server is running and the LilyGo T-Display S3 is configured with the correct WebSocket server IP.
 
 3. **Monitor the Data**:
-   - Connect a WebSocket client to the server (e.g., `ws://<server_ip>:8080`) to view the real-time sensor data.
+   - Open the React app to visualize real-time 3D data updates.
+   - Alternatively, connect a WebSocket client to the server (e.g., `ws://<server_ip>:8080`) to view the raw sensor data.
 
 ## Troubleshooting
 
@@ -138,12 +167,16 @@ This project comprises three main components:
    - Verify the LilyGo T-Display S3 is configured with the correct server IP.
    - Check that the Node.js server is running and listening on port 8080.
 
-3. **Accelerometer Data Issues**:
+3. **React App Issues**:
+
+   - Ensure the WebSocket URL in the `react-app/src/App.js` file is correctly configured to match the server's IP address.
+
+4. **Accelerometer Data Issues**:
 
    - Ensure the MPU6050 is connected to the correct pins (`SCL -> GPIO18`, `SDA -> GPIO17`).
    - Verify that the MPU6050 module is powered.
 
-4. **Vibration Motor Not Working**:
+5. **Vibration Motor Not Working**:
    - Check the wiring for the motor (`Input -> GPIO10`).
    - Verify that the vibration threshold is configured appropriately in the firmware.
 

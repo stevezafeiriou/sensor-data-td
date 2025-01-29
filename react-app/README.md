@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Sensor Data Visualization with React and Three.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a 3D visualization of real-time sensor data from an ESP32 device, developed using **React** and **Three.js**. The application features a rotating 3D model with a shiny chrome material, controlled dynamically by sensor data streamed via WebSocket.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Real-time sensor data visualization.
+- Rotating 3D model rendered with `@react-three/fiber` and `@react-three/drei`.
+- Shiny chrome material effect on the 3D model.
+- Responsive UI with styled-components.
+- Easily configurable WebSocket connection for sensor data.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Follow these steps to set up and run the application locally.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+Make sure you have the following installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (>=16.x)
+- npm (>=8.x)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone this repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install the required dependencies:
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Update the WebSocket URL in `App.js` to match your ESP32 server's IP address and port:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```javascript
+   const ws = new WebSocket("http://<your-nodejs-server-ip>:8080");
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Ensure your ESP32 device is configured to send sensor data in JSON format, with `x`, `y`, and `z` fields representing rotation angles in degrees.
 
-## Learn More
+### Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Run the app in development mode:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The app will automatically reload if you make changes to the code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Production Build
 
-### Analyzing the Bundle Size
+To create a production-ready build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm run build
+```
 
-### Making a Progressive Web App
+The build files will be generated in the `build` directory. You can deploy these files to any static hosting service.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### File Structure
 
-### Advanced Configuration
+```
+src/
+├── App.js                # Main application file
+├── components/
+│   ├── Scene.js          # 3D visualization component
+│   ├── SceneElements.js  # Styled-components for the scene container
+├── index.js              # Entry point of the application
+└── App.css               # Global styles
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## How It Works
 
-### Deployment
+### Real-Time Data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- The app connects to an ESP32 WebSocket server to receive real-time sensor data.
+- Sensor data is parsed and used to update the rotation of the 3D model.
 
-### `npm run build` fails to minify
+### 3D Visualization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The 3D model is rendered using `@react-three/fiber` and `@react-three/drei`.
+- A shiny chrome effect is applied using a `MeshStandardMaterial` with high metalness and low roughness.
+
+### UI
+
+- The application includes a simple card UI displaying sensor data, styled with `styled-components`.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Thanks to the creators of [React](https://reactjs.org/) and [Three.js](https://threejs.org/) for providing amazing tools for developers.
+- Special thanks to the developers of `@react-three/fiber` and `@react-three/drei` for making 3D rendering in React simple and intuitive.
