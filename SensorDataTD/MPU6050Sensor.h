@@ -4,10 +4,14 @@
 #include <Adafruit_MPU6050.h>
 #include <Wire.h>
 
+// The SensorData struct now holds both acceleration and gyro values.
 struct SensorData {
-    float x;
-    float y;
-    float z;
+    float ax;
+    float ay;
+    float az;
+    float gx;
+    float gy;
+    float gz;
 };
 
 class MPU6050Sensor {
@@ -18,7 +22,7 @@ public:
     
 private:
     static Adafruit_MPU6050 _mpu;
-    static SensorData _offset;
+    static SensorData _offset;  // Offsets for acceleration and gyro
     static bool _calibrated;
 };
 
