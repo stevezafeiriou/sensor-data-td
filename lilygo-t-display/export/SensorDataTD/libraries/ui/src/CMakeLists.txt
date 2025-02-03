@@ -1,0 +1,11 @@
+SET(SOURCES ui_main.c
+    ui_pressButton.c
+    ui.c
+    ui_comp_hook.c
+    ui_helpers.c
+    ui_img_info_png.c
+    fonts/ui_font_bold.c
+    fonts/ui_font_kanit.c
+    fonts/ui_font_boldS.c)
+
+add_library(ui ${SOURCES})
