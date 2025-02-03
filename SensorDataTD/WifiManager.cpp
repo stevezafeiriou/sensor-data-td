@@ -69,10 +69,23 @@ void startWiFiManager() {
 void handlePortal() {
     if (server.method() == HTTP_POST) {
         if (!server.hasArg("ssid") || !server.hasArg("password") || !server.hasArg("server_ip")) {
-            server.send(400, "text/html", "<html><body><h1>Error</h1><p>SSID, Password, and Server IP are required.</p></body></html>");
+            server.send(400, "text/html", 
+                "<!doctype html><html lang='en'><head>"
+                "<meta charset='utf-8'><title>WiFi Manager</title>"
+                "<meta name='viewport' content='width=device-width, initial-scale=1'>"
+                "<style>"
+                "*,::after,::before {box-sizing: border-box;}"
+                "body {margin: 0; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans';"
+                "font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #f5f5f5;}"
+                ".form-signin {width: 100%; max-width: 400px; padding: 15px; margin: auto;}"
+                "h1, p {text-align: center;}"
+                "</style></head><body>"
+                "<main class='form-signin'>"
+                "<h1>Error</h1><p>SSID, Password, and Server IP are required.</p>"
+                "</main></body></html>");
             return;
         }
-
+        
         String newSSID = server.arg("ssid");
         String newPassword = server.arg("password");
         String newServerIP = server.arg("server_ip");
@@ -86,7 +99,6 @@ void handlePortal() {
 
         WiFi.begin(newSSID.c_str(), newPassword.c_str());
         int counter = 0;
-
         while (WiFi.status() != WL_CONNECTED && counter < 30) {
             delay(1000);
             counter++;
@@ -95,25 +107,62 @@ void handlePortal() {
         if (WiFi.status() == WL_CONNECTED) {
             wifiConnected = true;
             server.send(200, "text/html", 
-                "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>WiFi Manager</title></head><body>"
-                "<h1>WiFi Connected</h1><p>Your device is now connected to the network.</p></body></html>");
+                "<!doctype html><html lang='en'><head>"
+                "<meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
+                "<title>WiFi Manager</title>"
+                "<style>"
+                "*,::after,::before {box-sizing: border-box;}"
+                "body {margin: 0; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans';"
+                "font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #f5f5f5;}"
+                ".form-signin {width: 100%; max-width: 400px; padding: 15px; margin: auto;}"
+                "h1, p {text-align: center;}"
+                "</style></head><body>"
+                "<main class='form-signin'>"
+                "<h1>WiFi Connected</h1><p>Your device is now connected to the network.</p>"
+                "</main></body></html>");
             initializeWebSocket(newServerIP);
         } else {
             wifiConnected = false;
             server.send(200, "text/html", 
-                "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>WiFi Manager</title></head><body>"
-                "<h1>WiFi Connection Failed</h1><p>Please check your credentials and try again.</p></body></html>");
+                "<!doctype html><html lang='en'><head>"
+                "<meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
+                "<title>WiFi Manager</title>"
+                "<style>"
+                "*,::after,::before {box-sizing: border-box;}"
+                "body {margin: 0; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans';"
+                "font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #f5f5f5;}"
+                ".form-signin {width: 100%; max-width: 400px; padding: 15px; margin: auto;}"
+                "h1, p {text-align: center;}"
+                "</style></head><body>"
+                "<main class='form-signin'>"
+                "<h1>WiFi Connection Failed</h1><p>Please check your credentials and try again.</p>"
+                "</main></body></html>");
         }
     } else {
         server.send(200, "text/html", 
-            "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>WiFi Manager</title></head><body>"
-            "<h1>WiFi Manager</h1><form method='POST'>"
+            "<!doctype html><html lang='en'><head>"
+            "<meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
+            "<title>WiFi Manager</title>"
+            "<style>"
+            "*,::after,::before {box-sizing: border-box;}"
+            "body {margin: 0; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans';"
+            "font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #f5f5f5;}"
+            ".form-signin {width: 100%; max-width: 400px; padding: 15px; margin: auto;}"
+            ".form-control {display: block; width: 100%; height: calc(1.5em + .75rem + 2px); border: 1px solid #ced4da; margin-bottom: 15px;}"
+            "button {cursor: pointer; border: 1px solid transparent; color: #fff; background-color: #dc4c99; border-color: #dc4c99; padding: .5rem 1rem; font-size: 1.25rem; line-height: 1.5; border-radius: .3rem; width: 100%;}"
+            "h1 {text-align: center;}"
+            "</style></head><body>"
+            "<main class='form-signin'>"
+            "<h1>WiFi Manager</h1>"
+            "<form method='POST'>"
             "<label for='ssid'>SSID:</label><br>"
-            "<input type='text' id='ssid' name='ssid'><br><br>"
+            "<input type='text' id='ssid' name='ssid' class='form-control'><br>"
             "<label for='password'>Password:</label><br>"
-            "<input type='password' id='password' name='password'><br><br>"
+            "<input type='password' id='password' name='password' class='form-control'><br>"
             "<label for='server_ip'>Server IP:</label><br>"
-            "<input type='text' id='server_ip' name='server_ip'><br><br>"
-            "<button type='submit'>Save</button></form></body></html>");
+            "<input type='text' id='server_ip' name='server_ip' class='form-control'><br>"
+            "<button type='submit'>Save</button>"
+            "</form></main></body></html>");
     }
 }
+
