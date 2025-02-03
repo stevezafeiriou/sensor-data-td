@@ -51,6 +51,15 @@ int buttonPressCount = 0;
 bool buttonStateLast = false;  // previous state (for edge detection)
 
 // --------------------------------------------------------------------
+// LED Animation Variables (for mode change)
+// --------------------------------------------------------------------
+bool modeAnimationActive = false;
+unsigned long modeAnimationStart = 0;
+int modeAnimationBlinkCount = 0;  // 1 for MODE A, 2 for MODE B
+unsigned long lastLEDToggleTime = 0;
+bool ledAnimationState = false;
+
+// --------------------------------------------------------------------
 // Helper: Convert mode enum to string for display
 // --------------------------------------------------------------------
 const char* modeToString(DeviceMode mode) {
@@ -143,12 +152,11 @@ void loop() {
     Vibration::update(vibration_active);
 
     // -------------------------------
-    // Read Button State & Update LED
+    // Read Button State
     // -------------------------------
     // With INPUT_PULLUP, unpressed reads HIGH and pressed reads LOW.
     bool isPressed = (digitalRead(BUTTON_PIN) == LOW);
-    digitalWrite(LED_PIN, isPressed ? HIGH : LOW);
-
+    
     // -------------------------------
     // Button Double-Press Detection to Toggle Modes
     // -------------------------------
@@ -166,9 +174,39 @@ void loop() {
         // Toggle between MODE_A and MODE_B
         currentMode = (currentMode == MODE_A) ? MODE_B : MODE_A;
         buttonPressCount = 0;  // reset the counter
+        
+        // Start LED mode animation:
+        modeAnimationActive = true;
+        modeAnimationStart = currentMillis;
+        lastLEDToggleTime = currentMillis;
+        ledAnimationState = false;
+        // Set blink count: 1 for MODE A, 2 for MODE B.
+        modeAnimationBlinkCount = (currentMode == MODE_A) ? 1 : 2;
     }
     if (currentMillis - lastButtonPressTime > 600) {
         buttonPressCount = 0;
+    }
+    
+    // -------------------------------
+    // LED Update / Animation
+    // -------------------------------
+    if (modeAnimationActive) {
+        if (currentMillis - modeAnimationStart < 1000) {
+            // Compute the half-period: (1 second) divided by (number of on/off toggles)
+            unsigned long period = 1000UL / (modeAnimationBlinkCount * 2);
+            if (currentMillis - lastLEDToggleTime >= period) {
+                ledAnimationState = !ledAnimationState;
+                digitalWrite(LED_PIN, ledAnimationState ? HIGH : LOW);
+                lastLEDToggleTime = currentMillis;
+            }
+        } else {
+            modeAnimationActive = false;
+            // After the animation ends, update LED normally according to button state.
+            digitalWrite(LED_PIN, isPressed ? HIGH : LOW);
+        }
+    } else {
+        // Normal LED update (reflect the button state).
+        digitalWrite(LED_PIN, isPressed ? HIGH : LOW);
     }
     
     // -------------------------------

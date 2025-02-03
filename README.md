@@ -1,5 +1,7 @@
 # SensorDataTD: Real-Time Sensor Data Transfer System
 
+![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/steve_zafeiriou)
+
 The **SensorDataTD** project is a complete solution for real-time accelerometer data collection, processing, and transmission. It includes both hardware and software components, along with a 3D-printable case design.
 
 You can find the complete tutorial at this link: [Sensor Data to TouchDesigner](#) _(Link to be added)_.
