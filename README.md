@@ -182,6 +182,18 @@ The React app provides a 3D visualization of the sensor data.
    - Check the wiring for the motor (`Input -> GPIO10`).
    - Verify that the vibration threshold is configured appropriately in the firmware.
 
+## TO DO LIST
+
+1. **FOR ESP32**:
+
+   - Add DEEP SLEEP mode to save power OR add a switch.
+   - Include OTA functionality, in order to program the device wirelessly.
+
+2. **FOR MODELS**:
+
+   - Include specific positions and clips to attach the components + the LilyGo.
+   - Maybe include an ON-OFF switch.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

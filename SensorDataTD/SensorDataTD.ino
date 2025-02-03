@@ -94,11 +94,11 @@ void updateDisplay(const SensorData &data, const String& status, bool btnState) 
     tft.printf("Acc:\nX:%.2f\nY:%.2f\nZ:%.2f", data.ax, data.ay, data.az);
     
     // Sensor data (Gyro)
-    tft.setCursor(0, 120);
+    tft.setCursor(0, 80);
     tft.printf("Gyro:\nX:%.2f\nY:%.2f\nZ:%.2f", data.gx, data.gy, data.gz);
     
     // Button state display
-    tft.setCursor(0, 210);
+    tft.setCursor(0, 110);
     tft.printf("Button: %s", btnState ? "Pressed" : "Not Pressed");
 }
 
